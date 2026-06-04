@@ -40,7 +40,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<'languages' | 'tech'>('languages')
 
   const copyUsername = () => {
-    navigator.clipboard.writeText('ziyad')
+    navigator.clipboard.writeText('curzservice')
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -80,7 +80,7 @@ export default function Home() {
 
           {/* Name */}
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tight">
-            ziyad
+            curzservice
           </h1>
 
           {/* Badges */}
@@ -119,7 +119,7 @@ export default function Home() {
               {copied ? (
                 <><span className="text-green-400">✓</span> Copied!</>
               ) : (
-                <><span>@</span> ziyad</>
+                <><span>@</span> curzservice</>
               )}
             </button>
           </div>
@@ -227,12 +227,12 @@ export default function Home() {
             </svg>
             Message me on Discord
           </a>
-          <p className="text-zinc-600 text-sm mt-4">@ziyad · Usually responds within a few hours</p>
+          <p className="text-zinc-600 text-sm mt-4">@curzservice · Usually responds within a few hours</p>
         </div>
 
         {/* Footer */}
         <p className="text-center text-zinc-700 text-sm mt-8">
-          © 2026 ziyad · Built with Next.js
+          © 2026 curzservice · Built with Next.js
         </p>
       </div>
     </main>
