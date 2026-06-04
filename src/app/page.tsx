@@ -161,21 +161,6 @@ export default function Home() {
                 View Portfolio
               </a>
             </motion.div>
-
-            <motion.div variants={fadeUp} className="grid grid-cols-2 md:grid-cols-3 gap-8 pt-10 border-t border-zinc-900/80">
-              <div>
-                <h4 className="text-4xl font-bold text-white mb-2 tracking-tight">40+</h4>
-                <p className="text-zinc-500 text-sm font-semibold uppercase tracking-widest">Projects Completed</p>
-              </div>
-              <div>
-                <h4 className="text-4xl font-bold text-white mb-2 tracking-tight">Fast</h4>
-                <p className="text-zinc-500 text-sm font-semibold uppercase tracking-widest">Delivery</p>
-              </div>
-              <div>
-                <h4 className="text-4xl font-bold text-white mb-2 tracking-tight">Custom</h4>
-                <p className="text-zinc-500 text-sm font-semibold uppercase tracking-widest">Solutions</p>
-              </div>
-            </motion.div>
           </motion.div>
         </motion.div>
       </section>
