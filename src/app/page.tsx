@@ -52,7 +52,7 @@ const TECHNOLOGIES = [
 
 const STATS = [
   { label: 'Projects Completed', value: '40+' },
-  { label: 'Client Satisfaction', value: '100%' },
+  { label: 'Client Satisfaction', value: '100' },
   { label: 'Support Availability', value: '24/7' }
 ]
 
