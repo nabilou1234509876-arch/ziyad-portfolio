@@ -124,7 +124,7 @@ export default function Home() {
           <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-4xl">
             <motion.div variants={scaleIn} className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border border-zinc-800 flex items-center justify-center mb-10 shadow-[0_0_40px_rgba(255,255,255,0.05)] overflow-hidden bg-zinc-900">
               <img 
-                src="/pfp.png" 
+                src="/pfp.jpg" 
                 alt="Profile" 
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                 onError={(e) => {
