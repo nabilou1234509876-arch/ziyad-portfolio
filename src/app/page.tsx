@@ -96,12 +96,19 @@ export default function Home() {
       <section className="relative z-10 min-h-screen flex flex-col justify-center pt-20">
         <div className="container mx-auto px-6 md:px-12">
           <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-4xl">
-            <motion.div variants={fadeUp} className="w-16 h-16 bg-zinc-900 border border-zinc-800 rounded-2xl flex items-center justify-center mb-10 shadow-2xl">
-              <Terminal size={28} className="text-zinc-100" />
+            <motion.div variants={fadeUp} className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border border-zinc-800 flex items-center justify-center mb-8 shadow-2xl overflow-hidden bg-zinc-900">
+              <img 
+                src="/pfp.png" 
+                alt="Profile" 
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.src = "https://i.imgur.com/8m5k2e3.jpeg"; // Fallback aesthetic placeholder similar to the one sent
+                }}
+              />
             </motion.div>
             
             <motion.h1 variants={fadeUp} className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-zinc-100 mb-6">
-              Curzservice
+              Curz
             </motion.h1>
             
             <motion.h2 variants={fadeUp} className="text-xl md:text-3xl text-zinc-400 font-medium mb-6">
@@ -274,7 +281,7 @@ export default function Home() {
       {/* ─── Footer ─── */}
       <footer className="relative z-10 py-10 border-t border-zinc-900 text-center">
         <p className="text-zinc-600 text-sm font-medium">
-          © {new Date().getFullYear()} Curzservice. Crafted with precision.
+          © {new Date().getFullYear()} Curz. Crafted with precision.
         </p>
       </footer>
 
