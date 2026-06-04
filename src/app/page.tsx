@@ -1,12 +1,20 @@
 'use client'
 
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Code2, Terminal, Monitor, Database, Cpu, Globe, Braces, Copy, Check, MessageSquare } from 'lucide-react'
 
 const languages = [
-  { name: 'JavaScript', icon: '🟨', color: '#F7DF1E', level: 95 },
-  { name: 'TypeScript', icon: '🔷', color: '#3178C6', level: 92 },
-  { name: 'Python', icon: '🐍', color: '#3776AB', level: 88 },
-  { name: 'HTML/CSS', icon: '🌐', color: '#E34F26', level: 98 },
+  { name: 'C++', icon: '⚡', color: '#00599C' },
+  { name: 'C', icon: '⚙️', color: '#A8B9CC' },
+  { name: 'Python', icon: '🐍', color: '#3776AB' },
+  { name: 'JavaScript', icon: '🟨', color: '#F7DF1E' },
+  { name: 'TypeScript', icon: '🔷', color: '#3178C6' },
+  { name: 'Rust', icon: '🦀', color: '#CE422B' },
+  { name: 'C#', icon: '🎯', color: '#239120' },
+  { name: 'Lua', icon: '🌙', color: '#000080' },
+  { name: 'Java', icon: '☕', color: '#ED8B00' },
+  { name: 'HTML/CSS', icon: '🎨', color: '#E34F26' },
 ]
 
 const technologies = [
@@ -14,6 +22,10 @@ const technologies = [
   { name: 'React', icon: '⚛️' },
   { name: 'Node.js', icon: '🟩' },
   { name: 'Discord.js', icon: '🤖' },
+  { name: 'PostgreSQL', icon: '🐘' },
+  { name: 'Docker', icon: '🐳' },
+  { name: 'Git', icon: '📚' },
+  { name: 'Linux', icon: '🐧' },
 ]
 
 export default function Home() {
@@ -26,120 +38,201 @@ export default function Home() {
     setTimeout(() => setCopied(false), 2000)
   }
 
+  // Animation variants
+  const containerVars = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+    }
+  }
+
+  const itemVars = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+  }
+
   return (
-    <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-4">
+    <main className="min-h-screen bg-[#050505] flex items-center justify-center p-4 sm:p-8 selection:bg-blue-500/30 selection:text-blue-200">
       
-      {/* Background glow */}
-      <div className="fixed inset-0 pointer-events-none flex items-center justify-center">
-        <div className="w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[120px]" />
+      {/* Subtle background glow */}
+      <div className="fixed inset-0 pointer-events-none flex items-center justify-center overflow-hidden">
+        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px]" />
       </div>
 
-      <div className="relative z-10 w-full max-w-2xl">
+      <motion.div 
+        initial="hidden"
+        animate="show"
+        variants={containerVars}
+        className="relative z-10 w-full max-w-[800px]"
+      >
         
-        {/* Main Profile Card - Exact match to screenshot */}
-        <div className="bg-[#111111] border border-white/5 rounded-[2rem] p-8 md:p-12 text-center shadow-2xl">
+        {/* Main Profile Card */}
+        <motion.div 
+          variants={itemVars}
+          className="bg-[#0f0f11]/90 backdrop-blur-2xl border border-white/5 rounded-[2.5rem] p-8 md:p-14 text-center shadow-[0_0_60px_rgba(0,0,0,0.5)]"
+        >
           
-          {/* Avatar */}
-          <div className="relative w-24 h-24 mx-auto mb-4">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gray-700 to-black p-[2px]">
-              <div className="w-full h-full rounded-full bg-[#0a0a0a] flex items-center justify-center overflow-hidden">
-                <span className="text-3xl font-bold text-white">C</span>
-              </div>
+          {/* Avatar with smooth pulsing glow */}
+          <motion.div 
+            variants={itemVars}
+            className="relative w-28 h-28 mx-auto mb-6 group"
+          >
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500/30 to-purple-500/30 blur-xl group-hover:blur-2xl transition-all duration-500 opacity-50" />
+            <div className="relative w-full h-full rounded-full border border-white/10 overflow-hidden bg-[#111]">
+              {/* Using a placeholder dark aesthetic PFP. Replace the src with your actual image path later */}
+              <img 
+                src="https://i.pinimg.com/736x/21/20/b0/2120b058cb9946e36306778243eadae5.jpg" 
+                alt="Profile" 
+                className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+              />
             </div>
-          </div>
+            {/* Online Status Dot */}
+            <div className="absolute bottom-1 right-1 w-6 h-6 bg-[#050505] rounded-full flex items-center justify-center">
+              <div className="w-4 h-4 bg-green-500 rounded-full shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
+            </div>
+          </motion.div>
 
           {/* Name */}
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
+          <motion.h1 
+            variants={itemVars}
+            className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight"
+          >
             curzservice
-          </h1>
+          </motion.h1>
 
           {/* Badges */}
-          <div className="flex items-center justify-center gap-3 mb-6 text-sm font-medium">
-            <span className="text-[#3b82f6]">Professional Coder</span>
-            <span className="px-3 py-1 rounded-full bg-[#064e3b]/40 text-[#34d399]">
+          <motion.div 
+            variants={itemVars}
+            className="flex items-center justify-center gap-3 mb-8 text-sm"
+          >
+            <span className="text-blue-400 font-medium px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20">
+              Professional Coder
+            </span>
+            <span className="text-emerald-400 font-medium px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               Commissions: Open
             </span>
-          </div>
+          </motion.div>
 
           {/* Description */}
-          <p className="text-[#a1a1aa] text-base leading-relaxed max-w-lg mx-auto mb-8">
-            I create a <strong className="text-white font-semibold">variety of custom bots</strong>, such as custom <strong className="text-white font-semibold">Discord bots, websites, and automation scripts</strong>.
+          <motion.p 
+            variants={itemVars}
+            className="text-[#a1a1aa] text-lg leading-relaxed max-w-2xl mx-auto mb-10"
+          >
+            I create a <strong className="text-white font-semibold">variety of custom software</strong>, including high-performance <strong className="text-white font-semibold">Discord bots, websites, and complex automation scripts</strong>.
             <br /><br />
-            Browse my skills below and contact me by clicking the Discord link below to join my server or <strong className="text-white font-semibold">DM me directly (curzservice)</strong> to discuss a price.
-          </p>
+            Browse my expertise below. If you need any tools, goods, or custom code, <strong className="text-white font-semibold">DM me directly (curzservice)</strong> and we'll discuss the perfect solution and price.
+          </motion.p>
 
           {/* Buttons */}
-          <div className="flex items-center justify-center gap-4 flex-wrap mb-10">
+          <motion.div 
+            variants={itemVars}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14"
+          >
             <a
               href="https://discord.com/users/1153392848490737684"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#1a1a1a] hover:bg-[#222222] border border-white/10 text-white font-medium transition-colors"
+              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-semibold transition-all duration-300 hover:shadow-[0_0_20px_rgba(88,101,242,0.4)] hover:-translate-y-0.5"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.114 18.1.136 18.113a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
-              </svg>
-              Discord
+              <MessageSquare size={20} />
+              Message on Discord
             </a>
 
             <button
               onClick={copyUsername}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#1a1a1a] hover:bg-[#222222] border border-white/10 text-white font-medium transition-colors"
+              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium transition-all duration-300 hover:-translate-y-0.5"
             >
-              {copied ? '✓ Copied' : '💬 Copy Username'}
+              {copied ? <Check size={20} className="text-green-400" /> : <Copy size={20} className="text-gray-400" />}
+              {copied ? 'Copied to clipboard' : 'Copy Username'}
             </button>
-          </div>
+          </motion.div>
 
-          {/* ─── Skills Section Mini ───────────────────────────────────────── */}
-          <div className="text-left bg-[#0a0a0a] rounded-2xl p-6 border border-white/5">
-            <div className="flex gap-4 mb-6 border-b border-white/10 pb-2">
+          {/* ─── Skills Section ───────────────────────────────────────── */}
+          <motion.div 
+            variants={itemVars}
+            className="text-left bg-[#050505]/50 rounded-[2rem] p-2 border border-white/5"
+          >
+            <div className="flex gap-2 p-2 mb-4 bg-white/5 rounded-2xl w-fit mx-auto sm:mx-0">
               <button
                 onClick={() => setActiveTab('languages')}
-                className={`text-sm font-medium pb-2 -mb-[9px] ${
+                className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
                   activeTab === 'languages'
-                    ? 'text-white border-b-2 border-[#3b82f6]'
-                    : 'text-[#a1a1aa] hover:text-white'
+                    ? 'bg-blue-500/20 text-blue-300 shadow-[0_0_15px_rgba(59,130,246,0.15)]'
+                    : 'text-[#888] hover:text-white hover:bg-white/5'
                 }`}
               >
                 Languages
               </button>
               <button
                 onClick={() => setActiveTab('tech')}
-                className={`text-sm font-medium pb-2 -mb-[9px] ${
+                className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
                   activeTab === 'tech'
-                    ? 'text-white border-b-2 border-[#3b82f6]'
-                    : 'text-[#a1a1aa] hover:text-white'
+                    ? 'bg-purple-500/20 text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.15)]'
+                    : 'text-[#888] hover:text-white hover:bg-white/5'
                 }`}
               >
                 Technologies
               </button>
             </div>
 
-            {activeTab === 'languages' && (
-              <div className="grid grid-cols-2 gap-4">
-                {languages.map((lang) => (
-                  <div key={lang.name} className="flex items-center gap-3 bg-[#111111] p-3 rounded-xl border border-white/5">
-                    <span className="text-xl">{lang.icon}</span>
-                    <span className="text-white font-medium text-sm">{lang.name}</span>
-                  </div>
-                ))}
-              </div>
-            )}
+            <div className="p-4 sm:p-6 min-h-[280px]">
+              <AnimatePresence mode="wait">
+                {activeTab === 'languages' && (
+                  <motion.div
+                    key="languages"
+                    initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
+                    transition={{ duration: 0.2 }}
+                    className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4"
+                  >
+                    {languages.map((lang, i) => (
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: i * 0.05 }}
+                        key={lang.name} 
+                        className="flex items-center gap-3 bg-white/[0.02] hover:bg-white/[0.06] p-4 rounded-2xl border border-white/5 transition-colors cursor-default"
+                      >
+                        <span className="text-2xl drop-shadow-md">{lang.icon}</span>
+                        <span className="text-zinc-200 font-medium text-sm sm:text-base">{lang.name}</span>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
 
-            {activeTab === 'tech' && (
-              <div className="grid grid-cols-2 gap-4">
-                {technologies.map((tech) => (
-                  <div key={tech.name} className="flex items-center gap-3 bg-[#111111] p-3 rounded-xl border border-white/5">
-                    <span className="text-xl">{tech.icon}</span>
-                    <span className="text-white font-medium text-sm">{tech.name}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+                {activeTab === 'tech' && (
+                  <motion.div
+                    key="tech"
+                    initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
+                    transition={{ duration: 0.2 }}
+                    className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4"
+                  >
+                    {technologies.map((tech, i) => (
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: i * 0.05 }}
+                        key={tech.name} 
+                        className="flex items-center gap-3 bg-white/[0.02] hover:bg-white/[0.06] p-4 rounded-2xl border border-white/5 transition-colors cursor-default"
+                      >
+                        <span className="text-2xl drop-shadow-md">{tech.icon}</span>
+                        <span className="text-zinc-200 font-medium text-sm sm:text-base">{tech.name}</span>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
           
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </main>
   )
 }
