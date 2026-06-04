@@ -33,7 +33,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<'languages' | 'tech'>('languages')
 
   const copyUsername = () => {
-    navigator.clipboard.writeText('curzservice')
+    navigator.clipboard.writeText('curzz')
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -99,7 +99,7 @@ export default function Home() {
             variants={itemVars}
             className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight"
           >
-            curzservice
+            curzz
           </motion.h1>
 
           {/* Badges */}
@@ -123,7 +123,7 @@ export default function Home() {
           >
             I create a <strong className="text-white font-semibold">variety of custom software</strong>, including high-performance <strong className="text-white font-semibold">Discord bots, websites, and complex automation scripts</strong>.
             <br /><br />
-            Browse my expertise below. If you need any tools, goods, or custom code, <strong className="text-white font-semibold">DM me directly (curzservice)</strong> and we'll discuss the perfect solution and price.
+            Browse my expertise below. If you need any tools, goods, or custom code, <strong className="text-white font-semibold">DM me directly (curzz)</strong> and we'll discuss the perfect solution and price.
           </motion.p>
 
           {/* Buttons */}

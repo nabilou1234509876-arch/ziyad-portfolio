@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'curzservice — Professional Developer',
+  title: 'curzz — Professional Developer',
   description: 'Professional developer specializing in web, bots, and automation. DM for custom work.',
   openGraph: {
-    title: 'curzservice — Professional Developer',
+    title: 'curzz — Professional Developer',
     description: 'Professional developer specializing in web, bots, and automation.',
     type: 'website',
   },
