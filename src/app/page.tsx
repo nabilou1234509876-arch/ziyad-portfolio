@@ -40,6 +40,9 @@ const PROJECTS = [
 ]
 
 const TECHNOLOGIES = [
+  { name: 'C++', icon: '⚡' },
+  { name: 'C', icon: '⚙️' },
+  { name: 'C#', icon: '🎯' },
   { name: 'Python', icon: '🐍' },
   { name: 'TypeScript', icon: '🔷' },
   { name: 'JavaScript', icon: '🟨' },
