@@ -177,7 +177,7 @@ export default function Home() {
               </div>
             </motion.div>
           </motion.div>
-        </div>
+        </motion.div>
       </section>
 
       {/* ─── Featured Projects ─── */}
