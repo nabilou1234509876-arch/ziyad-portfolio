@@ -140,8 +140,8 @@ export default function Home() {
         <div className="pointer-events-none fixed inset-0 z-0">
           <video
             ref={videoRef}
-            className={\`absolute inset-0 w-full h-full object-cover transition-all duration-1000 \${hasEntered && !showContent ? 'opacity-100 filter-none scale-100' : showContent ? 'opacity-20 blur-sm scale-105' : 'opacity-0'}\`}
-            src="/edit.mp4"
+            className={\`absolute inset-0 w-full h-full object-cover transition-all duration-[2000ms] ease-in-out \${hasEntered && !showContent ? 'opacity-100 filter-none scale-100' : showContent ? 'opacity-25 blur-[4px] scale-[1.02] brightness-75' : 'opacity-0'}\`}
+            src="/edit.mp4?v=3"
             loop
             playsInline
             muted={false}
