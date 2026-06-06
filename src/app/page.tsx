@@ -1,257 +1,317 @@
-'use client'
+"use client";
 
-import { useState, useEffect, useRef } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Bot, LayoutTemplate, Settings2, Shield, MessageSquare, Terminal, Code2, Play } from 'lucide-react'
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Play,
+  Terminal,
+  Code2,
+  Gamepad2,
+  ShieldAlert,
+  Cpu,
+  Box,
+  MessageSquare,
+  ArrowRight,
+  ExternalLink,
+} from "lucide-react";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const PROJECTS = [
   {
-    title: 'Advanced Ticket System',
-    description: 'Enterprise-grade Discord ticket system with transcript logging, multi-panel support, and staff analytics.',
-    tech: ['TypeScript', 'Discord.js', 'PostgreSQL'],
-    icon: MessageSquare
+    title: "Roblox Game Automation",
+    description:
+      "Advanced Luau and Python scripts for auto-farming, market sniping, data scraping, and seamless game automation at scale.",
+    tech: ["Luau", "Python", "WebSockets"],
+    icon: Terminal,
   },
   {
-    title: 'Verification System',
-    description: 'Secure captcha and web-based OAuth2 verification bot to prevent raids and malicious actors.',
-    tech: ['Next.js', 'TypeScript', 'Redis'],
-    icon: Shield
+    title: "Anti-Cheat / Security",
+    description:
+      "Server-side Roblox anti-exploit systems detecting speedhacks, flight, and unauthorized remote event fires.",
+    tech: ["Roblox Studio", "Luau"],
+    icon: ShieldAlert,
   },
   {
-    title: 'Moderation Bot',
-    description: 'Automated moderation with customizable automod rules, logging, and advanced strike systems.',
-    tech: ['Python', 'discord.py', 'MongoDB'],
-    icon: Bot
+    title: "Discord-to-Roblox Bridges",
+    description:
+      "Two-way communication bots linking Discord servers directly to Roblox game servers for live moderation and economy syncing.",
+    tech: ["TypeScript", "Node.js", "Express"],
+    icon: Cpu,
   },
   {
-    title: 'Dashboard Website',
-    description: 'Modern web interface for managing Discord bot settings, viewing statistics, and configuring modules.',
-    tech: ['Next.js', 'React', 'Tailwind CSS'],
-    icon: LayoutTemplate
+    title: "Custom Dashboards",
+    description:
+      "Modern web interfaces for managing your game metrics, viewing real-time statistics, and configuring external modules.",
+    tech: ["Next.js", "React", "Tailwind CSS"],
+    icon: Box,
   },
-  {
-    title: 'Automation Tools',
-    description: 'Custom Python scripts for scraping, data processing, and workflow automation.',
-    tech: ['Python', 'Selenium', 'REST APIs'],
-    icon: Settings2
-  }
-]
+];
 
-const TECHNOLOGIES = [
-  { name: 'C++' },
-  { name: 'C' },
-  { name: 'C#' },
-  { name: 'Python' },
-  { name: 'TypeScript' },
-  { name: 'JavaScript' },
-  { name: 'Lua' },
-  { name: 'HTML/CSS' }
-]
-
-const STATS = [
-  { label: 'Projects Completed', value: '40+' },
-  { label: 'Client Satisfaction', value: '100' },
-  { label: 'Support Availability', value: '24/7' }
-]
+const SKILLS = [
+  "Luau",
+  "Python",
+  "TypeScript",
+  "Node.js",
+  "React",
+  "Next.js",
+  "Discord.js",
+  "MongoDB",
+  "PostgreSQL",
+  "C++",
+  "C#",
+];
 
 // ─── Animations ──────────────────────────────────────────────────────────────
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 40, filter: 'blur(8px)' },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    filter: 'blur(0px)',
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
-  }
-}
+  hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
+};
 
 const stagger = {
-  visible: { transition: { staggerChildren: 0.15 } }
-}
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: { 
-    opacity: 1, 
-    scale: 1, 
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
-  }
-}
+  visible: { transition: { staggerChildren: 0.1 } },
+};
 
 // ─── Components ──────────────────────────────────────────────────────────────
 
 export default function Home() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-  const { scrollYProgress } = useScroll()
-  const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0])
-
-  const [hasEntered, setHasEntered] = useState(false)
-  const [showContent, setShowContent] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [hasEntered, setHasEntered] = useState(false);
+  const [showContent, setShowContent] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       requestAnimationFrame(() => {
-        setMousePos({ x: e.clientX, y: e.clientY })
-      })
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
+        setMousePos({ x: e.clientX, y: e.clientY });
+      });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   const handleEnter = () => {
-    setHasEntered(true)
+    setHasEntered(true);
     if (videoRef.current) {
-      videoRef.current.play()
+      videoRef.current.play();
     }
-    // Wait exactly 3 seconds to show content so the video is clear
+    // Exactly 3 seconds of raw 4K drop before content shows up
     setTimeout(() => {
-      setShowContent(true)
-    }, 3000)
-  }
+      setShowContent(true);
+    }, 3000);
+  };
 
   return (
     <>
       <AnimatePresence>
         {!hasEntered && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 0.5 } }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black cursor-pointer"
+            exit={{
+              opacity: 0,
+              transition: { duration: 0.7, ease: "easeInOut" },
+            }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black cursor-pointer overflow-hidden"
             onClick={handleEnter}
           >
-            <div className="flex flex-col items-center gap-4 text-white hover:scale-105 transition-transform duration-300">
-              <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-md border border-white/20">
-                <Play className="ml-1" size={32} fill="currentColor" />
+            {/* Cinematic pulsing effect */}
+            <motion.div
+              animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}
+              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+              className="absolute w-[600px] h-[600px] bg-red-600/20 rounded-full blur-[120px]"
+            />
+
+            <div className="flex flex-col items-center gap-6 text-white hover:scale-110 transition-transform duration-500 relative z-10">
+              <div className="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center backdrop-blur-xl border border-white/10 shadow-[0_0_50px_rgba(255,255,255,0.1)]">
+                <Play className="ml-2" size={40} fill="currentColor" />
               </div>
-              <p className="tracking-widest font-light uppercase text-sm">Click to enter</p>
+              <p className="tracking-[0.3em] font-light uppercase text-sm text-zinc-300 drop-shadow-lg">
+                Click to enter
+              </p>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <main className="relative min-h-screen bg-[#09090B] overflow-hidden selection:bg-zinc-100 selection:text-zinc-900 text-zinc-100">
-        
-        {/* ─── Background Video & Effects ─── */}
-        <div className="pointer-events-none fixed inset-0 z-0">
+      <main className="relative min-h-screen bg-[#050505] overflow-hidden selection:bg-red-500/30 selection:text-white text-zinc-100 font-sans">
+        {/* ─── Cinematic Video Background ─── */}
+        <div className="pointer-events-none fixed inset-0 z-0 bg-black">
           <video
             ref={videoRef}
-            className={\`absolute inset-0 w-full h-full object-cover transition-all duration-[2000ms] ease-in-out \${hasEntered && !showContent ? 'opacity-100 filter-none scale-100' : showContent ? 'opacity-25 blur-[4px] scale-[1.02] brightness-75' : 'opacity-0'}\`}
-            src="/edit.mp4?v=3"
+            className={`absolute inset-0 w-full h-full object-cover transition-all duration-[2000ms] ease-in-out ${
+              hasEntered && !showContent
+                ? "opacity-100 blur-0 scale-100 brightness-110" // The clear 4K 3-second drop
+                : showContent
+                  ? "opacity-30 blur-[8px] scale-[1.03] brightness-50" // Blurs into the background
+                  : "opacity-0"
+            }`}
+            src="/edit.mp4?v=4"
             loop
             playsInline
             muted={false}
           />
-          <div className={\`absolute inset-0 bg-black transition-opacity duration-1000 \${showContent ? 'opacity-60' : 'opacity-0'}\`} />
-          <div className={\`absolute inset-0 bg-grid-pattern transition-opacity duration-1000 \${showContent ? 'opacity-[0.15]' : 'opacity-0'}\`} />
-          <div 
-            className={\`absolute inset-0 transition-opacity duration-500 ease-out \${showContent ? 'opacity-100' : 'opacity-0'}\`}
+
+          {/* Overlays to make text readable */}
+          <div
+            className={`absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#050505] transition-opacity duration-[2000ms] ${showContent ? "opacity-100" : "opacity-0"}`}
+          />
+          <div
+            className={`absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] transition-opacity duration-1000 ${showContent ? "opacity-100" : "opacity-0"}`}
+          />
+
+          {/* Interactive Mouse Glow */}
+          <div
+            className={`absolute inset-0 transition-opacity duration-1000 ease-out ${showContent ? "opacity-100" : "opacity-0"}`}
             style={{
-              background: \`radial-gradient(800px circle at \${mousePos.x}px \${mousePos.y}px, rgba(255,255,255,0.04), transparent 40%)\`
+              background: `radial-gradient(800px circle at ${mousePos.x}px ${mousePos.y}px, rgba(220, 38, 38, 0.08), transparent 40%)`,
             }}
           />
         </div>
 
-        {/* ─── Content ─── */}
+        {/* ─── Main Content ─── */}
         <AnimatePresence>
           {showContent && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
               className="relative z-10"
             >
               {/* ─── Hero Section ─── */}
-              <section className="min-h-screen flex flex-col justify-center pt-20">
-                <motion.div 
-                  style={{ y: heroY, opacity: heroOpacity }}
-                  className="container mx-auto px-6 md:px-12"
-                >
-                  <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-4xl">
-                    <motion.div variants={scaleIn} className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border border-zinc-800 flex items-center justify-center mb-10 shadow-[0_0_40px_rgba(255,255,255,0.05)] overflow-hidden bg-zinc-900">
-                      <img 
-                        src="/pfp.jpg" 
-                        alt="Profile" 
-                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                        onError={(e) => {
-                          e.currentTarget.src = "https://i.imgur.com/8m5k2e3.jpeg"; 
-                        }}
-                      />
+              <section className="min-h-screen flex flex-col justify-center pt-20 pb-10">
+                <div className="container mx-auto px-6 md:px-12">
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={stagger}
+                    className="max-w-4xl"
+                  >
+                    <motion.div
+                      variants={fadeUp}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 mb-8 backdrop-blur-md"
+                    >
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                      </span>
+                      <span className="text-xs font-semibold uppercase tracking-wider">
+                        Available for work
+                      </span>
                     </motion.div>
-                    
-                    <motion.h1 variants={fadeUp} className="text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter text-white mb-6 drop-shadow-2xl">
-                      Curz
+
+                    <motion.h1
+                      variants={fadeUp}
+                      className="text-6xl md:text-8xl lg:text-[10rem] font-black tracking-tighter text-white mb-6 uppercase leading-none drop-shadow-2xl"
+                    >
+                      CURZ
                     </motion.h1>
-                    
-                    <motion.h2 variants={fadeUp} className="text-2xl md:text-4xl text-zinc-300 font-medium mb-8 tracking-tight drop-shadow-md">
-                      Discord Bot Developer <span className="hidden sm:inline">&</span><span className="sm:hidden"><br/>&</span> Automation Engineer
+
+                    <motion.h2
+                      variants={fadeUp}
+                      className="text-2xl md:text-4xl text-zinc-300 font-medium mb-8 tracking-tight drop-shadow-lg"
+                    >
+                      Roblox Developer <span className="text-red-500">&</span>{" "}
+                      Automation Engineer
                     </motion.h2>
-                    
-                    <motion.p variants={fadeUp} className="text-lg md:text-xl text-zinc-400 max-w-2xl mb-14 leading-relaxed font-light drop-shadow-md">
-                      Building premium Discord systems, custom bots, dashboards, websites, and robust automation solutions tailored for your community or business.
+
+                    <motion.p
+                      variants={fadeUp}
+                      className="text-lg md:text-xl text-zinc-400 max-w-2xl mb-14 leading-relaxed font-light drop-shadow-md"
+                    >
+                      Specializing in high-performance Luau scripting, external
+                      web-to-game integrations, Discord bots, and advanced game
+                      automation.
                     </motion.p>
-                    
-                    <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-24">
-                      <a 
-                        href="https://discord.com/users/1153392848490737684" 
-                        target="_blank" 
-                        rel="noreferrer" 
-                        className="group relative flex items-center justify-center gap-3 bg-zinc-100 text-zinc-950 px-8 py-4 rounded-full font-bold transition-all duration-300 w-full sm:w-auto overflow-hidden hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+
+                    <motion.div
+                      variants={fadeUp}
+                      className="flex flex-col sm:flex-row items-start sm:items-center gap-5"
+                    >
+                      <a
+                        href="https://discord.com/users/1153392848490737684"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="group relative flex items-center justify-center gap-3 bg-red-600 text-white px-10 py-5 rounded-full font-bold transition-all duration-300 w-full sm:w-auto overflow-hidden hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(220,38,38,0.4)]"
                       >
-                        Start a Project <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1.5" />
+                        Contact on Discord{" "}
+                        <ArrowRight
+                          size={18}
+                          className="transition-transform duration-300 group-hover:translate-x-1.5"
+                        />
                       </a>
-                      <a 
-                        href="#projects" 
-                        className="group flex items-center justify-center gap-3 bg-zinc-900/50 backdrop-blur-md border border-zinc-700/50 text-zinc-200 px-8 py-4 rounded-full font-semibold hover:bg-zinc-800 hover:text-white transition-all duration-300 w-full sm:w-auto hover:border-zinc-500"
+                      <a
+                        href="#projects"
+                        className="group flex items-center justify-center gap-3 bg-black/50 backdrop-blur-xl border border-zinc-800 text-zinc-300 px-10 py-5 rounded-full font-semibold hover:bg-white/5 hover:text-white transition-all duration-300 w-full sm:w-auto hover:border-zinc-600"
                       >
-                        View Portfolio
+                        View Projects
                       </a>
                     </motion.div>
                   </motion.div>
-                </motion.div>
+                </div>
               </section>
 
-              {/* ─── Featured Projects ─── */}
-              <section id="projects" className="py-32 bg-zinc-950/60 backdrop-blur-md border-y border-zinc-800/50">
+              {/* ─── Projects Section ─── */}
+              <section
+                id="projects"
+                className="py-32 bg-[#050505]/80 backdrop-blur-2xl border-t border-zinc-900/80"
+              >
                 <div className="container mx-auto px-6 md:px-12">
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
                     className="mb-20 max-w-2xl"
                   >
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Selected Work</h2>
+                    <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight text-white mb-6">
+                      Systems & Tools
+                    </h2>
                     <p className="text-zinc-400 text-lg leading-relaxed font-light">
-                      A showcase of premium systems, bots, and tools engineered for scalability and seamless user experience.
+                      A collection of my premium Roblox integrations, security
+                      systems, and automation software.
                     </p>
                   </motion.div>
 
                   <div className="grid md:grid-cols-2 gap-8 lg:gap-10">
                     {PROJECTS.map((project, i) => (
-                      <motion.div 
+                      <motion.div
                         key={project.title}
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-50px" }}
-                        transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                        whileHover={{ y: -8, transition: { duration: 0.3, ease: "easeOut" } }}
-                        className="group rounded-[2rem] bg-zinc-900/60 backdrop-blur-sm border border-zinc-700/50 hover:border-zinc-500/80 overflow-hidden transition-all duration-300 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)]"
+                        transition={{
+                          duration: 0.7,
+                          delay: i * 0.1,
+                          ease: [0.16, 1, 0.3, 1],
+                        }}
+                        whileHover={{
+                          y: -8,
+                          transition: { duration: 0.3, ease: "easeOut" },
+                        }}
+                        className="group rounded-[2rem] bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 backdrop-blur-sm border border-zinc-800 hover:border-red-500/50 overflow-hidden transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(220,38,38,0.15)]"
                       >
-                        <div className="aspect-[16/9] bg-black/40 relative overflow-hidden flex items-center justify-center p-8 border-b border-zinc-800/80">
-                          <div className="absolute inset-0 bg-gradient-to-br from-zinc-800/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                          <project.icon size={72} strokeWidth={1.2} className="text-zinc-600 transform group-hover:scale-110 group-hover:text-zinc-300 transition-all duration-700 ease-out" />
-                        </div>
-                        <div className="p-10">
-                          <h3 className="text-2xl md:text-3xl font-bold text-zinc-100 mb-4 tracking-tight">{project.title}</h3>
-                          <p className="text-zinc-400 mb-8 leading-relaxed font-light text-lg">{project.description}</p>
+                        <div className="p-10 flex flex-col h-full">
+                          <div className="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center mb-8 border border-red-500/20 group-hover:scale-110 group-hover:bg-red-500/20 transition-all duration-500">
+                            <project.icon size={32} className="text-red-400" />
+                          </div>
+                          <h3 className="text-2xl md:text-3xl font-bold text-zinc-100 mb-4 tracking-tight">
+                            {project.title}
+                          </h3>
+                          <p className="text-zinc-400 mb-10 leading-relaxed font-light text-lg flex-grow">
+                            {project.description}
+                          </p>
                           <div className="flex flex-wrap gap-2 mt-auto">
                             {project.tech.map((t) => (
-                              <span key={t} className="px-4 py-2 bg-black/40 text-zinc-300 text-sm font-medium rounded-xl border border-zinc-700/50">
+                              <span
+                                key={t}
+                                className="px-4 py-2 bg-black text-zinc-300 text-sm font-medium rounded-lg border border-zinc-800"
+                              >
                                 {t}
                               </span>
                             ))}
@@ -263,105 +323,88 @@ export default function Home() {
                 </div>
               </section>
 
-              {/* ─── Tech Stack ─── */}
-              <section className="py-40">
-                <div className="container mx-auto px-6 md:px-12 text-center">
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                    className="mb-20"
-                  >
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight drop-shadow-md">Technology Stack</h2>
-                    <p className="text-zinc-300 text-lg max-w-2xl mx-auto leading-relaxed font-light drop-shadow-md">
-                      Specialized expertise in modern programming languages to build efficient, maintainable, and high-performance applications.
-                    </p>
-                  </motion.div>
+              {/* ─── Tech Stack Marquee ─── */}
+              <section className="py-24 border-y border-zinc-900/80 bg-black/50 overflow-hidden relative">
+                <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#050505] to-transparent z-10" />
+                <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#050505] to-transparent z-10" />
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-5xl mx-auto">
-                    {TECHNOLOGIES.map((tech, i) => (
-                      <motion.div
-                        key={tech.name}
-                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                        whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                        whileHover={{ scale: 1.05, y: -5 }}
-                        className="flex flex-col items-center justify-center p-8 sm:p-12 rounded-[2rem] bg-zinc-900/60 backdrop-blur-md border border-zinc-700/50 hover:bg-zinc-800/80 hover:border-zinc-500/80 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-white/10 cursor-default group"
+                <div className="flex w-[200%] animate-[marquee_20s_linear_infinite]">
+                  <div className="flex w-1/2 justify-around items-center">
+                    {SKILLS.map((skill, i) => (
+                      <span
+                        key={i}
+                        className="text-3xl md:text-5xl font-black uppercase text-zinc-800 tracking-widest hover:text-zinc-600 transition-colors cursor-default"
                       >
-                        <Code2 size={24} className="text-zinc-500 mb-4 group-hover:text-zinc-300 transition-colors" />
-                        <span className="text-2xl sm:text-3xl font-bold text-zinc-100 tracking-tight">{tech.name}</span>
-                      </motion.div>
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex w-1/2 justify-around items-center">
+                    {SKILLS.map((skill, i) => (
+                      <span
+                        key={`duplicate-${i}`}
+                        className="text-3xl md:text-5xl font-black uppercase text-zinc-800 tracking-widest hover:text-zinc-600 transition-colors cursor-default"
+                      >
+                        {skill}
+                      </span>
                     ))}
                   </div>
                 </div>
               </section>
 
-              {/* ─── Trust / Stats ─── */}
-              <section className="pb-32">
+              {/* ─── Footer CTA ─── */}
+              <section className="py-32 relative text-center">
                 <div className="container mx-auto px-6 md:px-12">
-                  <div className="grid md:grid-cols-3 gap-6 lg:gap-8 text-center max-w-6xl mx-auto">
-                    {STATS.map((stat, i) => (
-                      <motion.div 
-                        key={stat.label}
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                        className="p-12 rounded-[2.5rem] bg-zinc-900/60 backdrop-blur-md border border-zinc-700/50"
-                      >
-                        <div className="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight drop-shadow-md">{stat.value}</div>
-                        <div className="text-zinc-400 font-semibold uppercase tracking-widest text-sm drop-shadow-md">{stat.label}</div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </section>
-
-              {/* ─── Contact Section ─── */}
-              <section className="py-32 bg-zinc-950/70 backdrop-blur-md border-t border-zinc-800/50">
-                <div className="container mx-auto px-6 md:px-12">
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, scale: 0.95, y: 40 }}
                     whileInView={{ opacity: 1, scale: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="max-w-5xl mx-auto bg-black/60 backdrop-blur-lg border border-zinc-700/50 rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl"
+                    className="max-w-4xl mx-auto"
                   >
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
-                    
-                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 relative z-10 tracking-tight drop-shadow-md">
-                      Ready to build your next project?
+                    <Gamepad2
+                      size={64}
+                      className="mx-auto text-zinc-800 mb-8"
+                    />
+                    <h2 className="text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tight">
+                      Let's Build.
                     </h2>
-                    <p className="text-xl md:text-2xl text-zinc-300 mb-14 max-w-2xl mx-auto relative z-10 leading-relaxed font-light drop-shadow-md">
-                      Let's collaborate to bring your ideas to life with clean architecture, premium design, and scalable code.
+                    <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-2xl mx-auto font-light">
+                      Ready to take your Roblox game or Discord community to the
+                      next level?
                     </p>
-                    
-                    <div className="flex justify-center relative z-10">
-                      <a 
-                        href="https://discord.com/users/1153392848490737684" 
-                        target="_blank" 
-                        rel="noreferrer" 
-                        className="group w-full sm:w-auto inline-flex justify-center items-center gap-3 bg-zinc-100 text-zinc-950 px-10 py-5 rounded-full font-bold hover:bg-white transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]"
-                      >
-                        <MessageSquare size={22} className="transition-transform group-hover:scale-110" /> Message on Discord
-                      </a>
-                    </div>
+                    <a
+                      href="https://discord.com/users/1153392848490737684"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-3 bg-white text-black px-10 py-5 rounded-full font-bold hover:bg-zinc-200 transition-all duration-300 hover:scale-105"
+                    >
+                      <MessageSquare size={20} /> DM on Discord
+                    </a>
                   </motion.div>
                 </div>
               </section>
 
-              {/* ─── Footer ─── */}
-              <footer className="py-12 border-t border-zinc-800/50 text-center bg-black/80 backdrop-blur-md">
-                <p className="text-zinc-500 text-sm font-medium tracking-wide">
-                  © {new Date().getFullYear()} Curz. Crafted with precision.
+              <footer className="py-8 text-center bg-black">
+                <p className="text-zinc-600 text-sm font-medium tracking-wide">
+                  © {new Date().getFullYear()} CURZ. All rights reserved.
                 </p>
               </footer>
             </motion.div>
           )}
         </AnimatePresence>
+
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+          @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+          }
+        `,
+          }}
+        />
       </main>
     </>
-  )
+  );
 }
